@@ -41,3 +41,66 @@ data = {
 df =pd.DataFrame(data)
 
 print(df)
+
+# data filtering 
+filtering_data = df[df["age"] > 27 ]
+
+print(df)
+print(f"Data filtered:{filtering_data}")
+
+
+# modification
+df["age"] =df["age"] + 1
+
+print(df)
+
+
+# Add custom column
+df["Country"] = ['Nigeria', "Nigeria", "Nigeria"]
+
+# Add custom row
+
+data = {
+    "Employee": ["Alice", "James", "John", "Samson", "Ademola"],
+    "Department": ["HR", "IT", "Finance", "HR", "IT"],
+    "Salary": [5000, 3000, 4000, 3200, 44433]
+}
+
+df = pd.DataFrame(data)
+print(f"Data grouping fram : {df}")
+
+data_grouping = df.groupby("Department")["Salary"].mean()
+
+print(data_grouping)
+
+# data merging
+df1 = pd.DataFrame(
+    {
+        "Employee": ["Alice", "James", "John", "Samson", "musa"],
+        "Department": ["HR", "IT", "Finance", "HR", "IT"],
+
+    }
+)
+
+df2 = pd.DataFrame({
+    "Employee": ["Alice", "James", "John", "Samson", "Ademola"],
+    "Salary": [5000, 3000, 4000, 3200, 44433]
+})
+merged = pd.merge(df1, df2, on="Employee")
+
+print(f"Data Merged: \n {merged}")
+
+# handling missing value
+hdf = pd.DataFrame({
+    "name": ["Adesola", "Tolu", "Ayo", "Musa"],
+    "age": [26, np.nan, 32, np.nan],
+    "city": ["lagos", "oyo", "Aduja", np.nan]
+})
+print(f"Missing Value detected: \n {hdf.isnull()}")
+
+print(f"handling data frame: \n{hdf}")
+drop = hdf.dropna()
+
+print(f"New data frame: \n {drop}")
+
+replace_nan = hdf.fillna({"age": hdf["age"].mean(), })
